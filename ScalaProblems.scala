@@ -12,6 +12,13 @@ object ScalaProblems extends App{
     case _ => throw new NoSuchElementException
   }
 
+  def kthElementFunctionally[A](n: Int, ls: List[A]): A = (n,ls) match {
+    case (0, h :: _ ) => h
+    case (n, _ :: tail) => kthElementFunctionally(n - 1,tail)
+    case(_, Nil) => throw new NoSuchElementException
+  }
+
   println(getLastElementFunctionally(List(1,2,3,4,5)))
   println(getPenultimateFunctionally(List(1,2,3,4,5)))
+  println(kthElementFunctionally(3,List(1,2,3,4,5)))
 }
