@@ -18,7 +18,13 @@ object ScalaProblems extends App{
     case(_, Nil) => throw new NoSuchElementException
   }
 
+  def countElementsInListFunctionally[A](ls: List[A]): Int = ls match {
+    case Nil => 0
+    case _ :: tail => 1 + countElementsInListFunctionally(tail)
+  }
+
   println(getLastElementFunctionally(List(1,2,3,4,5)))
   println(getPenultimateFunctionally(List(1,2,3,4,5)))
   println(kthElementFunctionally(3,List(1,2,3,4,5)))
+  println(countElementsInListFunctionally(List(1,2,3,69,4,5)))
 }
