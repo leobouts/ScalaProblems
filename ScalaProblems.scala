@@ -1,37 +1,43 @@
 object ScalaProblems extends App{
 
-  def getLastElementFunctionally[A](ls: List[A]): A = ls match {
+  def getLastElement[A](ls: List[A]): A = ls match {
     case h :: Nil => h
-    case _ :: tail => getLastElementFunctionally(tail)
+    case _ :: tail => getLastElement(tail)
     case _ => throw new NoSuchElementException
   }
 
-  def getPenultimateFunctionally[A](ls: List[A]): A = ls match {
+  def getPenultimateElement[A](ls: List[A]): A = ls match {
     case h :: _ :: Nil => h
-    case _ :: tail => getPenultimateFunctionally(tail)
+    case _ :: tail => getPenultimateElement(tail)
     case _ => throw new NoSuchElementException
   }
 
-  def kthElementFunctionally[A](n: Int, ls: List[A]): A = (n,ls) match {
+  def FindKthElement[A](n: Int, ls: List[A]): A = (n,ls) match {
     case (0, h :: _ ) => h
-    case (n, _ :: tail) => kthElementFunctionally(n - 1,tail)
+    case (n, _ :: tail) => FindKthElement(n - 1,tail)
     case(_, Nil) => throw new NoSuchElementException
   }
 
-  def countElementsInListFunctionally[A](ls: List[A]): Int = ls match {
+  def countElementsInList[A](ls: List[A]): Int = ls match {
     case Nil => 0
-    case _ :: tail => 1 + countElementsInListFunctionally(tail)
+    case _ :: tail => 1 + countElementsInList(tail)
   }
 
-  def reverseListFuntcionally[A](ls: List[A]): List[A] = ls match {
+  def reverseList[A](ls: List[A]): List[A] = ls match {
     case Nil => Nil
-    case h :: tail => reverseListFuntcionally(tail) ::: List(h)
+    case h :: tail => reverseList(tail) ::: List(h)
   }
 
+  def isPalindrome[A](ls: List[A]): Boolean = ls == ls.reverse
 
-//  println(getLastElementFunctionally(List(1,2,3,4,5)))
-//  println(getPenultimateFunctionally(List(1,2,3,4,5)))
-//  println(kthElementFunctionally(3,List(1,2,3,4,5)))
-//  println(countElementsInListFunctionally(List(1,2,3,69,4,5)))
-  println(reverseListFuntcionally(List(1,2,3,4,56)))
+  def flattenNestedListsIntoOne(ls: List[Any]): List[Any] = ls flatMap {
+    case ms: List[_] => flattenNestedListsIntoOne(ms)
+    case e => List(e)
+  }
+
+  def eliminateDuplicates[A](ls: List[A]): List[A] = ls match {
+    case Nil => Nil
+    case h :: tail => h :: eliminateDuplicates(tail.dropWhile(_ == h))
+  }
+
 }
