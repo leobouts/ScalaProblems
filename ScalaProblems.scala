@@ -23,8 +23,15 @@ object ScalaProblems extends App{
     case _ :: tail => 1 + countElementsInListFunctionally(tail)
   }
 
-  println(getLastElementFunctionally(List(1,2,3,4,5)))
-  println(getPenultimateFunctionally(List(1,2,3,4,5)))
-  println(kthElementFunctionally(3,List(1,2,3,4,5)))
-  println(countElementsInListFunctionally(List(1,2,3,69,4,5)))
+  def reverseListFuntcionally[A](ls: List[A]): List[A] = ls match {
+    case Nil => Nil
+    case h :: tail => reverseListFuntcionally(tail) ::: List(h)
+  }
+
+
+//  println(getLastElementFunctionally(List(1,2,3,4,5)))
+//  println(getPenultimateFunctionally(List(1,2,3,4,5)))
+//  println(kthElementFunctionally(3,List(1,2,3,4,5)))
+//  println(countElementsInListFunctionally(List(1,2,3,69,4,5)))
+  println(reverseListFuntcionally(List(1,2,3,4,56)))
 }
